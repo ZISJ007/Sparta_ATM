@@ -10,6 +10,7 @@ public class PopupBank : MonoBehaviour
     public GameObject depositPanel;
     public GameObject withdrawalPanel;
     public GameObject notEnoughMoneyUI;
+    public GameObject RemittancePanel;
     [Header("Input Fields")]
     public TMP_InputField depositInputField; // 입금 입력 필드
     public TMP_InputField withdrawInputField; // 출금 입력 필드
@@ -22,6 +23,7 @@ public class PopupBank : MonoBehaviour
         depositPanel.SetActive(false); // 입금 패널 비활성화
         withdrawalPanel.SetActive(false); // 출금 패널 비활성화
         notEnoughMoneyUI.SetActive(false); // 현금 부족 UI 비활성화
+        RemittancePanel.SetActive(false);
     }
     public void OnInputBank(int amount)
     {
@@ -91,6 +93,11 @@ public class PopupBank : MonoBehaviour
         depositPanel.SetActive(true);
         isDepositMode = true; // 입금 모드 활성화
     }
+    public void OpenRemittancePanel()
+    {
+        atmPanel.SetActive(false);
+        RemittancePanel.SetActive(true);
+    }
     public void OpenWithdrawal()
     {
         atmPanel.SetActive(false);
@@ -101,6 +108,7 @@ public class PopupBank : MonoBehaviour
     {
         withdrawalPanel.SetActive(false);
         depositPanel.SetActive(false);
+        RemittancePanel.SetActive(false);
         atmPanel.SetActive(true);
         isDepositMode = false; // 입금 모드 비활성화
         isWithdrawalMode = false; // 출금 모드 비활성화

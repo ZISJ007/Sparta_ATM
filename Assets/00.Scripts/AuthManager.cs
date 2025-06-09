@@ -3,11 +3,6 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-/// <summary>
-/// 회원가입과 로그인 로직을 담당하는 매니저.  
-/// UserDatabase(=여러 회원의 정보) 를 Load/Save하여,  
-/// 새 회원 가입 시 List에 추가하고, 로그인 시 일치하는 정보가 있는지 체크.
-/// </summary>
 public class AuthManager : MonoBehaviour
 {
     [Header("---- 회원가입 UI ----")]
@@ -44,9 +39,7 @@ public class AuthManager : MonoBehaviour
         userDatabase = UserDatabase.LoadFromPlayerPrefs();
     }
 
-    /// <summary>
-    /// '회원가입' 버튼을 눌렀을 때 호출될 메서드
-    /// </summary>
+    // '회원가입' 버튼을 눌렀을 때 호출될 메서드
     public void OnClick_Signup()
     {
         string userId = signupUserIdInput.text.Trim();
@@ -113,16 +106,9 @@ public class AuthManager : MonoBehaviour
         PlayerPrefs.Save();
 
         loginFeedbackText.text = $"<color=green>{found.name}님, 환영합니다!</color>";
-
-        // 원한다면 여기서 메인 게임 씬으로 전환
-        // SceneManager.LoadScene("MainScene");
     }
 
-    /// <summary>
-    /// 같은 아이디가 이미 존재하는지 여부를 검사한다.
-    /// </summary>
-    /// <param name="userId">검사할 아이디</param>
-    /// <returns>이미 존재하면 true, 없으면 false</returns>
+    // 같은 아이디가 이미 존재하는지 여부를 검사한다.
     private bool IsUserIdTaken(string userId)
     {
         foreach (UserData u in userDatabase.users)
@@ -136,9 +122,6 @@ public class AuthManager : MonoBehaviour
     /// <summary>
     /// 아이디·비밀번호가 일치하는 회원이 있으면 그 UserData 객체를 반환하고,  
     /// 없으면 null을 반환한다.
-    /// </summary>
-    /// <param name="userId">검색할 아이디</param>
-    /// <param name="password">검색할 비밀번호</param>
     private UserData FindUser(string userId, string password)
     {
         foreach (UserData u in userDatabase.users)
@@ -148,10 +131,8 @@ public class AuthManager : MonoBehaviour
         }
         return null;
     }
-    /// <summary>
-    /// 다른 곳에서 UserDatabase 업데이트 시(예: 잔액/현금 변경 등), 
-    /// AuthManager 쪽에서도 다시 불러오고 싶다면 호출할 수 있음
-    /// </summary>
+
+    // 다른 곳에서 UserDatabase 업데이트 시(예: 잔액/현금 변경 등), 
     public void ReloadUserDatabase()
     {
         userDatabase = UserDatabase.LoadFromPlayerPrefs();
