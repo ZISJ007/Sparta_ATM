@@ -92,9 +92,9 @@ public class GameManager : MonoBehaviour
 
     public void UpdateUI()
     {
-        if (userData == null || userData.userId == "guest")
+        if (userData == null)
         {
-            // guest 계정이거나 null인 경우
+            // null인 경우
             nameText.text = "로그인되지 않음";
             balanceText.text = $"잔액: -";
             cashText.text = $"현금: -";
